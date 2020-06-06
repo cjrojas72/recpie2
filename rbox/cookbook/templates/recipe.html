@@ -1,21 +1,31 @@
 <h1>recipe</h1>
 
 <ul>
-    {% for i in recipe%}
     <li>
-        {{i.title}}
+        {{recipe.title}}
     </li>
     <li>
-        By: <a href='{% url 'author' id=i.author.id %}'>{{ i.author }}</a>
+        By: <a href='{% url 'author' id=recipe.author.id %}'>{{ recipe.author }}</a>
     </li>
     <li>
-        Time to make: {{i.req_time}}
+        Time to make: {{recipe.req_time}}
     </li>
     <li>
-        {{i.description}}
+        {{recipe.description}}
     </li>
     <li>
-        {{i.instructions}}
+        {{recipe.instructions}}
     </li>
-    {% endfor%}
+    {% if request.user.is_authenticated %}
+    <li>
+        <a href="/editform/{{ recipe.id }}">edit</a>
+    </li>
+    <li>
+        {% if fav %}
+            You favorite this
+        {% else %}
+        <button><a href="/favorite/{{ recipe.id }}">Favorite</a></button>
+        {% endif %}
+    </li>
+    {% endif %}
 </ul>
