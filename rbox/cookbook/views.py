@@ -47,11 +47,17 @@ def author_detail(request, id):
 
 
 def recipe_detail(request, id):
-    user = request.user
-    recipe = Recipe.objects.filter(id=id)
-    try:
-        fav = Favorite.objects.get(recipe=recipe, user=user)
-    except:
+    recipe = Recipe.objects.get(id=id)
+
+    if request.user.is_authenticated:
+        try:
+            user = User.objects.get(id=request.user.id)
+            fav = Favorite.objects.get(recipe=recipe, user=user)
+            print("favorite")
+        except:
+            print("not favorite")
+            fav = None
+    else:
         fav = None
 
     return render(request, 'recipe.html', {'recipe': recipe, 'fav': fav})
