@@ -10,3 +10,10 @@ Bio: {{person.bio}}
 </li>
 {% endfor%}
 
+<h3>Favorites</h3>
+{% for i in fav%}
+<li>
+    <a href='/recipe/{{i.recipe.id}}'>{{i.recipe.title}}</a>
+</li>
+{% endfor%}
+

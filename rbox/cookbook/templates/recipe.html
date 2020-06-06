@@ -17,5 +17,15 @@
     <li>
         {{i.instructions}}
     </li>
+    <li>
+        <a href="/editform/{{ i.id }}">edit</a>
+    </li>
+    <li>
+        {% if fav %}
+            You favorite this
+        {% else %}
+        <button><a href="/favorite/{{ i.id }}">Favorite</a></button>
+        {% endif %}
+    </li>
     {% endfor%}
 </ul>
